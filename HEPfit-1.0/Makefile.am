@@ -1,0 +1,712 @@
+ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS} -I m4 --install
+AUTOMAKE_OPTIONS = subdir-objects
+
+AM_CXXFLAGS = -I$(top_srcdir)/BHWIDEWrapper/src \
+ -I$(top_srcdir)/BHWIDEWrapper/src \
+ -I$(top_srcdir)/ComputeObservables/src \
+ -I$(top_srcdir)/ComputeObservables/src \
+ -I$(top_srcdir)/EventGeneration/src \
+ -I$(top_srcdir)/EW/src \
+ -I$(top_srcdir)/Flavour/src \
+ -I$(top_srcdir)/FlavourWilsonCoefficient/src \
+ -I$(top_srcdir)/GeneralSUSY/src \
+ -I$(top_srcdir)/gslpp/src \
+ -I$(top_srcdir)/HiggsExtensions/src \
+ -I$(top_srcdir)/InputParser/src \
+ -I$(top_srcdir)/LeptonFlavour/src \
+ -I$(top_srcdir)/LoopFunctions/src \
+ -I$(top_srcdir)/MFV/src \
+ -I$(top_srcdir)/MonteCarlo/src \
+ -I$(top_srcdir)/NewPhysics/src \
+ -I$(top_srcdir)/Observables/src \
+ -I$(top_srcdir)/pMSSM/src \
+ -I$(top_srcdir)/StandardModel/src \
+ -I$(top_srcdir)/SUSY/src \
+ -I$(top_srcdir)/SUSYMassInsertion/src \
+ -I$(top_srcdir)/THDM/src \
+ -I$(top_srcdir)/LHPC/include \
+ -I$(top_srcdir)/LHPC/include/SLHA \
+ -I$(top_srcdir)/LHPC/include/SLHA/BlockClasses \
+ -I$(top_srcdir)/LHPC/include/SLHA/BlockClasses/InterpreterClasses \
+ -I$(top_srcdir)/LHPC/include/LHEF/PreselectorClasses \
+ -I$(top_srcdir)/LHPC/include/LHEF \
+ -I$(top_srcdir)/LHPC/include/LHEF/FilterRuleClasses \
+ -I$(top_srcdir)/LHPC/include/MEC \
+ -I$(top_srcdir)/LHPC/include/MEC/MSC \
+ -I$(top_srcdir)/LHPC/include/MEC/MSC/PSC \
+ -I$(top_srcdir)/LHPC/include/LHCO \
+ -I$(top_srcdir)/LHPC/include/SSP \
+ -I$(top_srcdir)/LHPC/include/BOLlib/include \
+ -I$(top_srcdir)/LHPC/include/PCAD 
+
+bin_PROGRAMS = Analysis/analysis
+
+pkginclude_HEADERS = BHWIDEWrapper/src/BHWIDE-f2c.h \
+BHWIDEWrapper/src/BHWIDEWrapper.h \
+ComputeObservables/src/InputParameters.h \
+ComputeObservables/src/ComputeObservables.h \
+EventGeneration/src/GenerateEvent.h \
+EW/src/LEP2sigmaMu.h \
+EW/src/Epsilon1.h \
+EW/src/Rbottom.h \
+EW/src/LEP2AFBcharm.h \
+EW/src/Acharm.h \
+EW/src/LEP2AFBbottom.h \
+EW/src/LEP2ThObservable.h \
+EW/src/AFBbottom.h \
+EW/src/LEP2Rcharm.h \
+EW/src/Epsilon2.h \
+EW/src/GammaZ.h \
+EW/src/sigmaHadron.h \
+EW/src/sin2thetaEff.h \
+EW/src/PtauPol.h \
+EW/src/AFBlepton.h \
+EW/src/Alepton.h \
+EW/src/Epsilon3.h \
+EW/src/LEP2sigmaTau.h \
+EW/src/Epsilonb.h \
+EW/src/LEP2sigmaCharm.h \
+EW/src/Mw.h \
+EW/src/LEP2TwoFermions.h \
+EW/src/LEP2sigmaBottom.h \
+EW/src/LEP2AFBtau.h \
+EW/src/LEP2oblique.h \
+EW/src/Rlepton.h \
+EW/src/LEP2Rbottom.h \
+EW/src/LEP2sigmaHadron.h \
+EW/src/Abottom.h \
+EW/src/AFBcharm.h \
+EW/src/EWObservables.h \
+EW/src/LEP2AFBmu.h \
+EW/src/LEP2test.h \
+EW/src/Rcharm.h \
+EW/src/GammaW.h \
+Flavour/src/CPenguinBoxMu.h \
+Flavour/src/BR_Kp0nunu.h \
+Flavour/src/FlavourObservables.h \
+Flavour/src/VCKM.h \
+Flavour/src/HeffDS1.h \
+Flavour/src/AmpDB2.h \
+Flavour/src/HeffDF1bsg.h \
+Flavour/src/EvolDF1nlep.h \
+Flavour/src/HeffDF2.h \
+Flavour/src/MVllObservables.h \
+Flavour/src/Bdmumu.h \
+Flavour/src/bsgamma.h \
+Flavour/src/BR_Bsnunu.h \
+Flavour/src/EvolDC1Buras.h \
+Flavour/src/EvolDB1bsg.h \
+Flavour/src/MVll.h \
+Flavour/src/HeffDF1bnlep.h \
+Flavour/src/BR_Kmumu.h \
+Flavour/src/Btaunu.h \
+Flavour/src/DmBs.h \
+Flavour/src/alpha.h \
+Flavour/src/AmpDS1.h \
+Flavour/src/Charm_Kpnunu.h \
+Flavour/src/alpha_2a.h \
+Flavour/src/EpsilonK.h \
+Flavour/src/DmBd.h \
+Flavour/src/HeffDB1.h \
+Flavour/src/gamma.h \
+Flavour/src/BR_Bdnunu.h \
+Flavour/src/AmpDK2.h \
+Flavour/src/EvolDB1Mll.h \
+Flavour/src/DmK.h \
+Flavour/src/AmpDD2.h \
+Flavour/src/MVgamma.h \
+Flavour/src/EvolBsmm.h \
+Flavour/src/MPllObservables.h \
+Flavour/src/ArgD.h \
+Flavour/src/EvolDC1.h \
+Flavour/src/SJPsiK.h \
+Flavour/src/M12D.h \
+Flavour/src/EvolDF2.h \
+Flavour/src/Flavour.h \
+Flavour/src/EpsilonP_O_Epsilon.h \
+Flavour/src/CPenguinBox.h \
+Flavour/src/Betas_JPsiPhi.h \
+Flavour/src/MPll.h \
+Flavour/src/BR_Kppnunu.h \
+Flavour/src/Bsmumu.h \
+Flavour/src/HeffDC1.h \
+FlavourWilsonCoefficient/src/FlavourWilsonCoefficientMatching.h \
+FlavourWilsonCoefficient/src/FlavourWilsonCoefficient.h \
+GeneralSUSY/src/GeneralSUSY.h \
+gslpp/src/gslpp_vector_double.h \
+gslpp/src/gslpp_vector_base.h \
+gslpp/src/gslpp_complex.h \
+gslpp/src/gslpp_matrix_base.h \
+gslpp/src/gslpp_matrix_double.h \
+gslpp/src/gslpp_vector_complex.h \
+gslpp/src/gslpp_matrix_complex.h \
+gslpp/src/gslpp.h \
+HiggsExtensions/src/HiggsThObservables.h \
+HiggsExtensions/src/HiggsKvgenKf.h \
+HiggsExtensions/src/HiggsKvKf.h \
+HiggsExtensions/src/HiggsKvKfgen.h \
+InputParser/src/ModelFactory.h \
+InputParser/src/ThObsFactory.h \
+InputParser/src/InputParser.h \
+LeptonFlavour/src/li_3lj.h \
+LeptonFlavour/src/li_lj_gamma.h \
+LeptonFlavour/src/LeptonFlavour.h \
+LeptonFlavour/src/gminus2.h \
+LeptonFlavour/src/HeffDLij.h \
+LeptonFlavour/src/Heffmueconv.h \
+LeptonFlavour/src/Heffgminus2.h \
+LeptonFlavour/src/HeffDLi3j.h \
+LeptonFlavour/src/LeptonFlavourObservables.h \
+LeptonFlavour/src/mueconversion.h\
+LoopFunctions/src/LoopToolsWrapper.h \
+LoopFunctions/src/BernoulliNumbers.h \
+LoopFunctions/src/PVfunctions.h \
+LoopFunctions/src/Polylogarithms.h \
+LoopFunctions/src/ClausenFunctions.h \
+MFV/src/MFV.h \
+MFV/src/Xmatrices.h \
+MonteCarlo/src/MonteCarlo.h \
+MonteCarlo/src/MonteCarloEngine.h \
+NewPhysics/src/NPZbbbar.h \
+NewPhysics/src/NPSTUVWXY.h \
+NewPhysics/src/EW_ABC.h \
+NewPhysics/src/EW_BURGESS.h \
+NewPhysics/src/NPSTU.h \
+NewPhysics/src/NPEffectiveBS.h \
+NewPhysics/src/EW_CHMN.h \
+NewPhysics/src/NPEffectiveGIMR.h \
+NewPhysics/src/NPHiggs.h \
+NewPhysics/src/NPEpsilons.h \
+NewPhysics/src/EW_TEST.h \
+NewPhysics/src/NPZbbbarLinearized.h \
+NewPhysics/src/NPEpsilons_pureNP.h \
+NewPhysics/src/NPbase.h \
+NewPhysics/src/NPSTUZbbbarLR.h \
+Observables/src/HiggsObservable.h \
+Observables/src/ThObservable.h \
+Observables/src/ModelParameter.h \
+Observables/src/ParamObs.h \
+Observables/src/CorrelatedGaussianObservables.h \
+Observables/src/Observable2D.h \
+Observables/src/Observable.h \
+Observables/src/CorrelatedGaussianParameters.h \
+pMSSM/src/pMSSM.h \
+StandardModel/src/EWSMTwoFermionsLEP2.h \
+StandardModel/src/ModelMatching.h \
+StandardModel/src/EWSMApproximateFormulae.h \
+StandardModel/src/OrderScheme.h \
+StandardModel/src/BParameter.h \
+StandardModel/src/RGEvolutor.h \
+StandardModel/src/EWSMThreeLoopQCD.h \
+StandardModel/src/EWSM_Output.h \
+StandardModel/src/Model.h \
+StandardModel/src/StandardModelMatching.h \
+StandardModel/src/PMNS.h \
+StandardModel/src/EWSMOneLoopEW_HV.h \
+StandardModel/src/EWSMThreeLoopEW2QCD.h \
+StandardModel/src/QCD.h \
+StandardModel/src/Particle.h \
+StandardModel/src/CKM.h \
+StandardModel/src/EWSMTwoLoopEW.h \
+StandardModel/src/EWSMOneLoopEW.h \
+StandardModel/src/WilsonCoefficient.h \
+StandardModel/src/EWSMcache.h \
+StandardModel/src/EWSMTwoLoopQCD.h \
+StandardModel/src/EWSMTwoFermionsLEP2_Hollik.h \
+StandardModel/src/StandardModel.h \
+StandardModel/src/Meson.h \
+StandardModel/src/EWSMThreeLoopEW.h \
+StandardModel/src/WilsonTemplate.h \
+SUSY/src/Mslepton.h \
+SUSY/src/Mchargino.h \
+SUSY/src/Msdown.h \
+SUSY/src/Msneutrino.h \
+SUSY/src/Mneutralino.h \
+SUSY/src/SUSYMatching.h \
+SUSY/src/SUSYSpectrum.h \
+SUSY/src/Mhiggs.h \
+SUSY/src/Msup.h \
+SUSY/src/SUSYObservables.h \
+SUSY/src/SUSY.h \
+SUSYMassInsertion/src/SUSYMassInsertionMatching.h \
+SUSYMassInsertion/src/SUSYMassInsertion.h \
+THDM/src/bsgamma.h \
+THDM/src/CPoddHiggs.h \
+THDM/src/EWPO.h \
+THDM/src/THDMMatching.h \
+THDM/src/globalminimum.h \
+THDM/src/THDMfunctions.h \
+THDM/src/lightHiggs.h \
+THDM/src/heavyHiggs.h \
+THDM/src/positivity.h \
+THDM/src/THDMquantities.h \
+THDM/src/THDMObservables.h \
+THDM/src/THDMcache.h \
+THDM/src/unitarity.h \
+THDM/src/THDM.h \
+THDM/src/STU.h \
+LHPC/include/PDG.hpp \
+LHPC/include/SLHA/SlhaTwoWithSpheno.hpp \
+LHPC/include/SLHA/SlhaParser.hpp \
+LHPC/include/SLHA/FlavorObservable.hpp \
+LHPC/include/SLHA/FlavorObservableError.hpp \
+LHPC/include/SLHA/SlhaOne.hpp \
+LHPC/include/SLHA/BlockClasses.hpp \
+LHPC/include/SLHA/BlockClasses/SparseManyIndexedBlock.hpp \
+LHPC/include/SLHA/BlockClasses/SparseDoublyIndexedBlock.hpp \
+LHPC/include/SLHA/BlockClasses/InterpreterClasses/SparseQuadruplyIndexed.hpp \
+LHPC/include/SLHA/BlockClasses/InterpreterClasses/InterpreterTemplate.hpp \
+LHPC/include/SLHA/BlockClasses/InterpreterClasses/IndexedInterpreter.hpp \
+LHPC/include/SLHA/BlockClasses/InterpreterClasses/SparseSinglyIndexed.hpp \
+LHPC/include/SLHA/BlockClasses/InterpreterClasses/MultipleTriplyIndexed.hpp \
+LHPC/include/SLHA/BlockClasses/InterpreterClasses/JustSingleValue.hpp \
+LHPC/include/SLHA/BlockClasses/InterpreterClasses/SparseDoublyIndexed.hpp \
+LHPC/include/SLHA/BlockClasses/InterpreterClasses/SparseManyIndexed.hpp \
+LHPC/include/SLHA/BlockClasses/InterpreterClasses/DenseSinglyIndexed.hpp \
+LHPC/include/SLHA/BlockClasses/InterpreterClasses/BlockInterpreter.hpp \
+LHPC/include/SLHA/BlockClasses/InterpreterClasses/MultipleSinglyIndexed.hpp \
+LHPC/include/SLHA/BlockClasses/InterpreterClasses/DenseDoublyIndexed.hpp \
+LHPC/include/SLHA/BlockClasses/InterpreterClasses/LinesAsStrings.hpp \
+LHPC/include/SLHA/BlockClasses/InterpreterClasses/MultipleDoublyIndexed.hpp \
+LHPC/include/SLHA/BlockClasses/InterpreterClasses/DenseTriplyIndexed.hpp \
+LHPC/include/SLHA/BlockClasses/BaseStringBlock.hpp \
+LHPC/include/SLHA/BlockClasses/DoublyIndexedMultipleEntriesBlock.hpp \
+LHPC/include/SLHA/BlockClasses/LinesAsStringsBlock.hpp \
+LHPC/include/SLHA/BlockClasses/SparseSinglyIndexedBlock.hpp \
+LHPC/include/SLHA/BlockClasses/InterpreterClasses.hpp \
+LHPC/include/SLHA/BlockClasses/DenseSinglyIndexedBlock.hpp \
+LHPC/include/SLHA/BlockClasses/TriplyIndexedMultipleEntriesBlock.hpp \
+LHPC/include/SLHA/BlockClasses/BaseSlhaBlock.hpp \
+LHPC/include/SLHA/BlockClasses/IndexedBlockTemplate.hpp \
+LHPC/include/SLHA/BlockClasses/DenseDoublyIndexedBlock.hpp \
+LHPC/include/SLHA/BlockClasses/DenseTriplyIndexedBlock.hpp \
+LHPC/include/SLHA/BlockClasses/SparseQuadruplyIndexedBlock.hpp \
+LHPC/include/SLHA/BlockClasses/SinglyIndexedMultipleEntriesBlock.hpp \
+LHPC/include/SLHA/BlockClasses/SameNameBlockSet.hpp \
+LHPC/include/SLHA/BlockClasses/JustSingleValueBlock.hpp \
+LHPC/include/SLHA/SlhaBlock.hpp \
+LHPC/include/SLHA/SlhaTwo.hpp \
+LHPC/include/SLHA/FlhaOne.hpp \
+LHPC/include/SLHA/SlhaSimplisticInterpreter.hpp \
+LHPC/include/SLHA/BlockTypes.hpp \
+LHPC/include/SLHA.hpp \
+LHPC/include/LHEF/PreselectorClasses/EitherSignElectronPreselector.hpp \
+LHPC/include/LHEF/PreselectorClasses/JetPreselector.hpp \
+LHPC/include/LHEF/PreselectorClasses/EitherSignMuonPreselector.hpp \
+LHPC/include/LHEF/PreselectorClasses/StandardPreselector.hpp \
+LHPC/include/LHEF/PreselectorClasses/LightLeptonPreselector.hpp \
+LHPC/include/LHEF/PreselectorClasses.hpp \
+LHPC/include/LHEF/InterfaceToClhepLorentzVectorClass.hpp \
+LHPC/include/LHEF/FilterRule.hpp \
+LHPC/include/LHEF/LhefParser.hpp \
+LHPC/include/LHEF/FilterRuleClasses/InitialOrIntermediateOrFinalState.hpp \
+LHPC/include/LHEF/FilterRuleClasses/TransverseMomentumCut.hpp \
+LHPC/include/LHEF/FilterRuleClasses/PseudorapidityCut.hpp \
+LHPC/include/LHEF/FilterRuleClasses/ParticleCode.hpp \
+LHPC/include/LHEF/AutomaticEventFilter.hpp \
+LHPC/include/LHEF/FilterRuleClasses.hpp \
+LHPC/include/LHEF/LhefEvent.hpp \
+LHPC/include/LHEF/ParticleLine.hpp \
+LHPC/include/MEC/DefaultSpectra.hpp \
+LHPC/include/MEC/SpectrumUpdater.hpp \
+LHPC/include/MEC/MSC/PSC.hpp \
+LHPC/include/MEC/MSC/MinimalSupersymmetricStandardModel.hpp \
+LHPC/include/MEC/MSC/CodesAndDataForMassEigenstates.hpp \
+LHPC/include/MEC/MSC/PSC/SquarksOneToSix.hpp \
+LHPC/include/MEC/MSC/PSC/ChargedSleptonsOneToSix.hpp \
+LHPC/include/MEC/MSC/PSC/NeutralinosOneToFive.hpp \
+LHPC/include/MEC/MSC/PSC/MssmExtraEwsbSpinZeroBosonSet.hpp \
+LHPC/include/MEC/MSC/PSC/NeutralinosOneToFour.hpp \
+LHPC/include/MEC/MSC/PSC/SneutrinosOneToThree.hpp \
+LHPC/include/MEC/MSC/PSC/NmssmExtraEwsbSpinZeroBosonSet.hpp \
+LHPC/include/MEC/MSC/PSC/GluinoOneGeneration.hpp \
+LHPC/include/MEC/MSC/PSC/CharginosOneToTwo.hpp \
+LHPC/include/MEC/MSC/NextToMinimalSupersymmetricStandardModel.hpp \
+LHPC/include/MEC/MSC/StandardModel.hpp \
+LHPC/include/MEC/RunningConstantError.hpp \
+LHPC/include/MEC/MassEigenstate.hpp \
+LHPC/include/MEC/ExtendedMass.hpp \
+LHPC/include/MEC/MSC.hpp \
+LHPC/include/MEC/MapAndVectorAndBools.hpp \
+LHPC/include/MEC/PointersWithValue.hpp \
+LHPC/include/MEC/MassSpectrum.hpp \
+LHPC/include/MEC/RunningConstant.hpp \
+LHPC/include/MEC.hpp \
+LHPC/include/LHCO.hpp \
+LHPC/include/LHCO/ObjectLine.hpp \
+LHPC/include/LHCO/FourMomentum.hpp \
+LHPC/include/LHCO/LhcoEvent.hpp \
+LHPC/include/LHCO/LhcoParser.hpp \
+LHPC/include/SSP/SpectrumPlotter.hpp \
+LHPC/include/SSP/SlhaValueLineColoring.hpp \
+LHPC/include/SSP/SlhaValuePlotter.hpp \
+LHPC/include/SSP/LineData.hpp \
+LHPC/include/SSP/SlhaValueSingleColor.hpp \
+LHPC/include/SSP/SlhaValueColoredSegments.hpp \
+LHPC/include/SSP/SlhaValuePlotLine.hpp \
+LHPC/include/BOLlib/include/PushingObserved.hpp \
+LHPC/include/BOLlib/include/ArgumentParser.hpp \
+LHPC/include/BOLlib/include/StdVectorFiller.hpp \
+LHPC/include/BOLlib/include/VectorlikeArray.hpp \
+LHPC/include/BOLlib/include/InputFileToOutputFileClaimer.hpp \
+LHPC/include/BOLlib/include/BasicObserved.hpp \
+LHPC/include/BOLlib/include/PushedToObserver.hpp \
+LHPC/include/BOLlib/include/CommentedTextParser.hpp \
+LHPC/include/BOLlib/include/BasicObserver.hpp \
+LHPC/include/BOLlib/include/WaitingOnSubprocessExecutor.hpp \
+LHPC/include/BOLlib/include/TwoDimensionalDataPlotter.hpp \
+LHPC/include/BOLlib/include/BasicTimer.hpp \
+LHPC/include/BOLlib/include/BOLlib.hpp \
+LHPC/include/BOLlib/include/BalancedPartitionCandidate.hpp \
+LHPC/include/BOLlib/include/StringParser.hpp \
+LHPC/include/BOLlib/include/AsciiXmlParser.hpp \
+LHPC/include/BOLlib/include/FilePlaceholderManager.hpp \
+LHPC/include/BOLlib/include/UsefulStuff.hpp \
+LHPC/include/BOLlib/include/BalancedPartitioner.hpp \
+LHPC/include/PCAD/PdgData.hpp \
+LHPC/include/PCAD/NineDigitSlhaCodes.hpp \
+LHPC/include/PCAD/SevenDigitSlhaCodes.hpp \
+LHPC/include/LHEF.hpp 
+
+themySOURCES = BHWIDEWrapper/src/BHWIDEWrapper.cpp \
+ComputeObservables/src/ComputeObservables.cpp \
+EventGeneration/src/GenerateEvent.cpp \
+EW/src/Rcharm.cpp \
+EW/src/LEP2AFBmu.cpp \
+EW/src/GammaW.cpp \
+EW/src/LEP2sigmaMu.cpp \
+EW/src/LEP2AFBcharm.cpp \
+EW/src/AFBlepton.cpp \
+EW/src/Rbottom.cpp \
+EW/src/sin2thetaEff.cpp \
+EW/src/LEP2Rcharm.cpp \
+EW/src/LEP2oblique.cpp \
+EW/src/LEP2sigmaCharm.cpp \
+EW/src/Rlepton.cpp \
+EW/src/LEP2sigmaTau.cpp \
+EW/src/LEP2sigmaHadron.cpp \
+EW/src/Abottom.cpp \
+EW/src/LEP2sigmaBottom.cpp \
+EW/src/sigmaHadron.cpp \
+EW/src/AFBcharm.cpp \
+EW/src/LEP2AFBtau.cpp \
+EW/src/LEP2AFBbottom.cpp \
+EW/src/LEP2TwoFermions.cpp \
+EW/src/AFBbottom.cpp \
+EW/src/Acharm.cpp \
+EW/src/Mw.cpp \
+EW/src/Alepton.cpp \
+EW/src/LEP2Rbottom.cpp \
+EW/src/PtauPol.cpp \
+EW/src/GammaZ.cpp \
+EW/src/LEP2test.cpp \
+Flavour/src/HeffDF2.cpp \
+Flavour/src/BR_Bdnunu.cpp \
+Flavour/src/AmpDS1.cpp \
+Flavour/src/BR_Kmumu.cpp \
+Flavour/src/AmpDK2.cpp \
+Flavour/src/MVgamma.cpp \
+Flavour/src/EpsilonP_O_Epsilon.cpp \
+Flavour/src/alpha.cpp \
+Flavour/src/HeffDB1.cpp \
+Flavour/src/EvolDC1Buras.cpp \
+Flavour/src/HeffDF1bnlep.cpp \
+Flavour/src/DmBd.cpp \
+Flavour/src/EvolDF2.cpp \
+Flavour/src/DmK.cpp \
+Flavour/src/DmBs.cpp \
+Flavour/src/alpha_2a.cpp \
+Flavour/src/HeffDC1.cpp \
+Flavour/src/MPll.cpp \
+Flavour/src/SJPsiK.cpp \
+Flavour/src/BR_Bsnunu.cpp \
+Flavour/src/Betas_JPsiPhi.cpp \
+Flavour/src/Charm_Kpnunu.cpp \
+Flavour/src/BR_Kp0nunu.cpp \
+Flavour/src/EvolDB1bsg.cpp \
+Flavour/src/Bdmumu.cpp \
+Flavour/src/EvolBsmm.cpp \
+Flavour/src/VCKM.cpp \
+Flavour/src/CPenguinBox.cpp \
+Flavour/src/EvolDC1.cpp \
+Flavour/src/MPllObservables.cpp \
+Flavour/src/EpsilonK.cpp \
+Flavour/src/Bsmumu.cpp \
+Flavour/src/bsgamma.cpp \
+Flavour/src/HeffDF1bsg.cpp \
+Flavour/src/EvolDB1Mll.cpp \
+Flavour/src/EvolDF1nlep.cpp \
+Flavour/src/AmpDB2.cpp \
+Flavour/src/MVll.cpp \
+Flavour/src/AmpDD2.cpp \
+Flavour/src/MVllObservables.cpp \
+Flavour/src/CPenguinBoxMu.cpp \
+Flavour/src/BR_Kppnunu.cpp \
+Flavour/src/Btaunu.cpp \
+Flavour/src/HeffDS1.cpp \
+FlavourWilsonCoefficient/src/FlavourWilsonCoefficient.cpp \
+FlavourWilsonCoefficient/src/FlavourWilsonCoefficientMatching.cpp \
+GeneralSUSY/src/GeneralSUSY.cpp \
+gslpp/src/gslpp_vector_complex.cpp \
+gslpp/src/gslpp_matrix_double.cpp \
+gslpp/src/gslpp_matrix_complex.cpp \
+gslpp/src/gslpp_complex.cpp \
+gslpp/src/gslpp_vector_double.cpp \
+HiggsExtensions/src/HiggsKvKf.cpp \
+HiggsExtensions/src/HiggsKvgenKf.cpp \
+HiggsExtensions/src/HiggsKvKfgen.cpp \
+InputParser/src/ThObsFactory.cpp \
+InputParser/src/InputParser.cpp \
+InputParser/src/ModelFactory.cpp \
+LeptonFlavour/src/gminus2.cpp \
+LeptonFlavour/src/li_lj_gamma.cpp \
+LeptonFlavour/src/HeffDLi3j.cpp \
+LeptonFlavour/src/HeffDLij.cpp \
+LeptonFlavour/src/Heffgminus2.cpp \
+LeptonFlavour/src/Heffmueconv.cpp \
+LeptonFlavour/src/li_3lj.cpp \
+LeptonFlavour/src/mueconversion.cpp \
+LHPC/include/BOLlib/source/BalancedPartitionCandidate.cpp \
+LHPC/include/BOLlib/source/WaitingOnSubprocessExecutor.cpp \
+LHPC/include/BOLlib/source/CommentedTextParser.cpp \
+LHPC/include/BOLlib/source/InputFileToOutputFileClaimer.cpp \
+LHPC/include/BOLlib/source/BasicTimer.cpp \
+LHPC/include/BOLlib/source/UsefulStuff.cpp \
+LHPC/include/BOLlib/source/BasicObserver.cpp \
+LHPC/include/BOLlib/source/StringParser.cpp \
+LHPC/include/BOLlib/source/AsciiXmlParser.cpp \
+LHPC/include/BOLlib/source/ArgumentParser.cpp \
+LHPC/include/BOLlib/source/BasicObserved.cpp \
+LHPC/include/BOLlib/source/TwoDimensionalDataPlotter.cpp \
+LHPC/include/BOLlib/source/FilePlaceholderManager.cpp \
+LHPC/source/SLHA/SlhaTwo.cpp \
+LHPC/source/SLHA/SlhaSimplisticInterpreter.cpp \
+LHPC/source/SLHA/SlhaOne.cpp \
+LHPC/source/SLHA/BlockClasses/BaseSlhaBlock.cpp \
+LHPC/source/SLHA/BlockClasses/InterpreterClasses/BlockInterpreter.cpp \
+LHPC/source/SLHA/BlockClasses/InterpreterClasses/LinesAsStrings.cpp \
+LHPC/source/SLHA/BlockClasses/SameNameBlockSet.cpp \
+LHPC/source/SLHA/BlockClasses/LinesAsStringsBlock.cpp \
+LHPC/source/SLHA/BlockClasses/BaseStringBlock.cpp \
+LHPC/source/SLHA/SlhaParser.cpp \
+LHPC/source/SLHA/FlavorObservableError.cpp \
+LHPC/source/SLHA/FlavorObservable.cpp \
+LHPC/source/SLHA/SlhaTwoWithSpheno.cpp \
+LHPC/source/SLHA/FlhaOne.cpp \
+LHPC/source/LHEF/ParticleLine.cpp \
+LHPC/source/LHEF/LhefEvent.cpp \
+LHPC/source/LHEF/PreselectorClasses/EitherSignMuonPreselector.cpp \
+LHPC/source/LHEF/PreselectorClasses/JetPreselector.cpp \
+LHPC/source/LHEF/PreselectorClasses/EitherSignElectronPreselector.cpp \
+LHPC/source/LHEF/PreselectorClasses/StandardPreselector.cpp \
+LHPC/source/LHEF/PreselectorClasses/LightLeptonPreselector.cpp \
+LHPC/source/LHEF/AutomaticEventFilter.cpp \
+LHPC/source/LHEF/LhefParser.cpp \
+LHPC/source/LHEF/FilterRuleClasses/TransverseMomentumCut.cpp \
+LHPC/source/LHEF/FilterRuleClasses/PseudorapidityCut.cpp \
+LHPC/source/LHEF/FilterRuleClasses/InitialOrIntermediateOrFinalState.cpp \
+LHPC/source/LHEF/FilterRuleClasses/ParticleCode.cpp \
+LHPC/source/LHEF/FilterRule.cpp \
+LHPC/source/MEC/RunningConstantError.cpp \
+LHPC/source/MEC/MSC/MinimalSupersymmetricStandardModel.cpp \
+LHPC/source/MEC/MSC/StandardModel.cpp \
+LHPC/source/MEC/MSC/PSC/NeutralinosOneToFive.cpp \
+LHPC/source/MEC/MSC/PSC/NmssmExtraEwsbSpinZeroBosonSet.cpp \
+LHPC/source/MEC/MSC/PSC/NeutralinosOneToFour.cpp \
+LHPC/source/MEC/MSC/PSC/ChargedSleptonsOneToSix.cpp \
+LHPC/source/MEC/MSC/PSC/CharginosOneToTwo.cpp \
+LHPC/source/MEC/MSC/PSC/GluinoOneGeneration.cpp \
+LHPC/source/MEC/MSC/PSC/SneutrinosOneToThree.cpp \
+LHPC/source/MEC/MSC/PSC/MssmExtraEwsbSpinZeroBosonSet.cpp \
+LHPC/source/MEC/MSC/PSC/SquarksOneToSix.cpp \
+LHPC/source/MEC/MSC/NextToMinimalSupersymmetricStandardModel.cpp \
+LHPC/source/MEC/MassSpectrum.cpp \
+LHPC/source/MEC/MassEigenstate.cpp \
+LHPC/source/MEC/ExtendedMass.cpp \
+LHPC/source/MEC/RunningConstant.cpp \
+LHPC/source/MEC/SpectrumUpdater.cpp \
+LHPC/source/LHCO/LhcoEvent.cpp \
+LHPC/source/LHCO/ObjectLine.cpp \
+LHPC/source/LHCO/FourMomentum.cpp \
+LHPC/source/LHCO/LhcoParser.cpp \
+LHPC/source/SSP/SlhaValueColoredSegments.cpp \
+LHPC/source/SSP/SlhaValuePlotter.cpp \
+LHPC/source/SSP/LineData.cpp \
+LHPC/source/SSP/SpectrumPlotter.cpp \
+LHPC/source/SSP/SlhaValueLineColoring.cpp \
+LHPC/source/SSP/SlhaValueSingleColor.cpp \
+LHPC/source/SSP/SlhaValuePlotLine.cpp \
+LHPC/source/PCAD/NineDigitSlhaCodes.cpp \
+LHPC/source/PCAD/PdgData.cpp \
+LHPC/source/PCAD/SevenDigitSlhaCodes.cpp \
+LoopFunctions/src/ClausenFunctions.cpp \
+LoopFunctions/src/PVfunctions.cpp \
+LoopFunctions/src/Polylogarithms.cpp \
+LoopFunctions/src/BernoulliNumbers.cpp \
+LoopFunctions/src/LoopToolsWrapper.cpp \
+MFV/src/MFV.cpp \
+MFV/src/Xmatrices.cpp \
+MonteCarlo/src/MonteCarlo.cpp \
+MonteCarlo/src/MonteCarloEngine.cpp \
+NewPhysics/src/NPSTU.cpp \
+NewPhysics/src/NPEpsilons_pureNP.cpp \
+NewPhysics/src/NPEffectiveGIMR.cpp \
+NewPhysics/src/NPSTUZbbbarLR.cpp \
+NewPhysics/src/EW_TEST.cpp \
+NewPhysics/src/NPHiggs.cpp \
+NewPhysics/src/NPSTUVWXY.cpp \
+NewPhysics/src/NPZbbbar.cpp \
+NewPhysics/src/EW_ABC.cpp \
+NewPhysics/src/EW_CHMN.cpp \
+NewPhysics/src/NPEpsilons.cpp \
+NewPhysics/src/NPZbbbarLinearized.cpp \
+NewPhysics/src/NPEffectiveBS.cpp \
+NewPhysics/src/EW_BURGESS.cpp \
+NewPhysics/src/NPbase.cpp \
+Observables/src/CorrelatedGaussianParameters.cpp \
+Observables/src/CorrelatedGaussianObservables.cpp \
+Observables/src/ModelParameter.cpp \
+Observables/src/ParamObs.cpp \
+Observables/src/HiggsObservable.cpp \
+Observables/src/Observable2D.cpp \
+Observables/src/Observable.cpp \
+pMSSM/src/pMSSM.cpp \
+StandardModel/src/EWSMTwoFermionsLEP2.cpp \
+StandardModel/src/StandardModelMatching.cpp \
+StandardModel/src/EWSMOneLoopEW_HV.cpp \
+StandardModel/src/EWSMTwoLoopEW.cpp \
+StandardModel/src/RGEvolutor.cpp \
+StandardModel/src/EWSMcache.cpp \
+StandardModel/src/QCD.cpp \
+StandardModel/src/EWSMOneLoopEW.cpp \
+StandardModel/src/EWSMThreeLoopEW.cpp \
+StandardModel/src/EWSMTwoFermionsLEP2_Hollik.cpp \
+StandardModel/src/EWSM_Output.cpp \
+StandardModel/src/WilsonCoefficient.cpp \
+StandardModel/src/Meson.cpp \
+StandardModel/src/PMNS.cpp \
+StandardModel/src/Particle.cpp \
+StandardModel/src/EWSMThreeLoopEW2QCD.cpp \
+StandardModel/src/EWSMApproximateFormulae.cpp \
+StandardModel/src/StandardModel.cpp \
+StandardModel/src/CKM.cpp \
+StandardModel/src/EWSMTwoLoopQCD.cpp \
+StandardModel/src/EWSMThreeLoopQCD.cpp \
+SUSY/src/SUSYMatching.cpp \
+SUSY/src/SUSYSpectrum.cpp \
+SUSY/src/SUSY.cpp \
+SUSYMassInsertion/src/SUSYMassInsertionMatching.cpp \
+SUSYMassInsertion/src/SUSYMassInsertion.cpp \
+THDM/src/bsgamma.cpp \
+THDM/src/CPoddHiggs.cpp \
+THDM/src/EWPO.cpp \
+THDM/src/globalminimum.cpp \
+THDM/src/heavyHiggs.cpp	\
+THDM/src/lightHiggs.cpp \
+THDM/src/positivity.cpp \
+THDM/src/STU.cpp \
+THDM/src/THDMcache.cpp \
+THDM/src/THDM.cpp \
+THDM/src/THDMfunctions.cpp \
+THDM/src/THDMMatching.cpp \
+THDM/src/THDMquantities.cpp \
+THDM/src/unitarity.cpp       
+
+Analysis_analysis_SOURCES =  $(themySOURCES) Analysis/main.cpp
+
+Analysis_analysis_CPPFLAGS = $(SuF_CFLAGS) -I@ROOTINCDIR@  $(BOOST_CPPFLAGS) $(GSL_CFLAGS) 
+
+Analysis_analysis_LDADD = $(SuF_LIBS) $(FLIBS) $(GSL_LIBS) -lgslcblas $(BOOST_PROGRAM_OPTIONS_LIBS) $(BOOST_PROGRAM_OPTIONS_LDFLAGS) -L@ROOTLIBDIR@ @ROOTGLIBS@ -lRooFitCore -lRooFit -lRooStats -lFoam -lMathMore -lMinuit @ROOTAUXLIBS@ 
+
+
+pkglib_LTLIBRARIES = libHEPfit-@HEPfit_API_VERSION@.la
+libHEPfit_@HEPfit_API_VERSION@_la_SOURCES = $(themySOURCES) 
+
+libHEPfit_@HEPfit_API_VERSION@_la_LDFLAGS = -version-info $(HEPfit_SO_VERSION)
+libHEPfit_@HEPfit_API_VERSION@_la_CPPFLAGS = $(SuF_CFLAGS) -I@ROOTINCDIR@  $(BOOST_CPPFLAGS)  $(GSL_CFLAGS)
+libHEPfit_@HEPfit_API_VERSION@_la_LIBDADD = $(SuF_LIBS) $(FLIBS) $(GSL_LIBS) -lgslcblas $(BOOST_PROGRAM_OPTIONS_LIBS) $(BOOST_PROGRAM_OPTIONS_LDFLAGS) -L@ROOTLIBDIR@  @ROOTGLIBS@ -lRooFitCore -lRooFit -lRooStats -lFoam -lMathMore -lMinuit @ROOTAUXLIBS@  
+
+
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = HEPfit-$(HEPfit_API_VERSION).pc
+
+bin_SCRIPTS = hepfit-config
+
+m4datadir = $(datadir)/aclocal
+m4data_DATA = m4/hepfit.m4
+
+#dist_noinst_SCRIPTS = 
+
+EXTRA_DIST = Analysis/Higgs Analysis/input Analysis/nbproject Analysis/tests \
+BAT-0.9.4.1_parallel Configurations doc Doxygen Utils BAT-0.9.3_parallel Packaging ZFitterWrapper \
+Analysis/nbproject \
+Analysis/Makefile \
+Analysis/Flavour.conf \
+Analysis/FlavourWC.conf \
+Analysis/GeneralSUSY.conf \
+Analysis/HiggsKvKf.conf \
+Analysis/Model.conf \
+Analysis/MonteCarlo.conf \
+Analysis/SUSYMassInsertion.conf \
+Analysis/StandardModel.conf \
+Analysis/THDM.conf \
+Analysis/main_MCMC_example.cpp \
+Analysis/main_libmode_config_example.cpp \
+Analysis/main_libmode_header_example.cpp \
+Analysis/main_libmode_slha2_to_GeneralSUSYconfigfile.cpp \
+Analysis/NPEffectiveGIMR_LFU_QFU.conf \
+BHWIDEWrapper/nbproject \
+ComputeObservables/nbproject \
+EventGeneration/nbproject \
+EW/nbproject \
+Flavour/nbproject \
+FlavourWilsonCoefficient/nbproject \
+GeneralSUSY/nbproject \
+gslpp/nbproject \
+HiggsExtensions/nbproject \
+InputParser/nbproject \
+LeptonFlavour/nbproject \
+LoopFunctions/nbproject \
+MFV/nbproject \
+MFV/tests/ \
+MonteCarlo/nbproject \
+NewPhysics/nbproject \
+Observables/nbproject \
+pMSSM/nbproject \
+StandardModel/nbproject \
+SUSY/nbproject \
+SUSYMassInsertion/nbproject \
+THDM/nbproject \
+Utils/nbproject \
+ZFitterWrapper/nbproject \
+BHWIDEWrapper/Makefile \
+ComputeObservables/Makefile \
+EventGeneration/Makefile \
+EW/Makefile \
+Flavour/Makefile \
+FlavourWilsonCoefficient/Makefile \
+GeneralSUSY/Makefile \
+gslpp/Makefile \
+HiggsExtensions/Makefile \
+InputParser/Makefile \
+LeptonFlavour/Makefile \
+LoopFunctions/Makefile \
+MFV/Makefile \
+MonteCarlo/Makefile \
+NewPhysics/Makefile \
+Observables/Makefile \
+pMSSM/Makefile \
+StandardModel/Makefile \
+SUSY/Makefile \
+SUSYMassInsertion/Makefile \
+THDM/Makefile \
+THDM/tabs \
+Utils/Makefile \
+ZFitterWrapper/Makefile
+
+dist_noinst_SCRIPTS = 
+
+DISTCLEANFILES = config.hepfit
+# CLEANFILES = hepfit.pc hepfit-config
+# EXTRA_DIST =  hepfit.pc.in 
+
