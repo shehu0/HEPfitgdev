@@ -15,12 +15,6 @@
 /* Define to 1 if you have the `BAT' library (-lBAT). */
 #undef HAVE_LIBBAT
 
-/* Define to 1 if you have the `gslcblas' library (-lgslcblas). */
-#undef HAVE_LIBGSLCBLAS
-
-/* Define to 1 if you have the `m' library (-lm). */
-#undef HAVE_LIBM
-
 /* Define to 1 if you have the `ooptools' library (-looptools). */
 #undef HAVE_LIBOOPTOOLS
 
