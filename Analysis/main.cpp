@@ -71,7 +71,9 @@ int main(int argc, char** argv)
         /* ThObsF.addObsToFactory(ThObsName, boost::factory<ThObsClass*>() )*/
         
         /* Create an object of the class MonteCarlo. */
-        MonteCarlo MC(ModelF, ThObsF, ModelConf, MCMCConf, FileOut, JobTag);
+	//        MultiNest MN(ModelF, ThObsF, ModelConf, MCMCConf, FileOut, JobTag);
+	// MN.RunMultiNest();
+	MonteCarlo MC(ModelF, ThObsF, ModelConf, MCMCConf, FileOut, JobTag);
         
         /* Do a test run if you wish to see the values of the observables      */
         /* and the correlated Gaussian observables defined in the model        */

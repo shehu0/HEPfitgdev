@@ -70,6 +70,12 @@ public:
                                                                                 std::string& infilename,
                                                                                 int rank);
     
+    boost::tokenizer<boost::char_separator<char> >::iterator &  ParseObservable(std::string& type,
+                                                                                boost::tokenizer<boost::char_separator<char> >* tok, 
+                                                                                boost::tokenizer<boost::char_separator<char> >::iterator & beg, 
+                                                                                std::string& filepath, 
+                                                                                std::string& infilename);
+    
     /**
      * @brief The default destructor.
      */

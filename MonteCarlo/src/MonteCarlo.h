@@ -59,7 +59,7 @@ public:
             const std::string& ModelConf_i,
             const std::string& MonteCarloConf_i,
             const std::string& OutFile_i,
-            const std::string& JobTag_i);
+	       const std::string& JobTag_i); // : DoNestedSamplingMCMC(false) { }
 
     /**
      * @brief The default destructor.
@@ -150,7 +150,7 @@ public:
     }
     
    void addCustomObservableType(const std::string name, boost::function<Observable*() > funct);
-   
+
 private:
     std::string ModelName; ///< The name of the model.
     InputParser myInputParser; ///< An object of the InputParser class.
@@ -165,6 +165,7 @@ private:
     std::string OutFile; ///< String for the name of the output root file without the .root extension.
     std::string JobTag; ///< String for the optional JobTag argument to be passes to the executable.
     std::string ObsDirName; ///< String for the output directory name.
+    //    bool DoNestedSamplingMCMC; ///< Flag for chosing to perfrom a Nested Sampling MCMC instead of classic MCMC.
     bool FindModeWithMinuit; ///< Flag for using Minuit libraries.
     bool CalculateNormalization; ///<< Flag for calculating the evidence.
     bool PrintAllMarginalized; ///< Flag for printing all Marginalized distributions to be passed on to the <a href="https://www.mppmu.mpg.de/bat/" target=blank>BAT</a> routines.

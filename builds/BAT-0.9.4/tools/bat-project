@@ -3,7 +3,7 @@
 PROGRAM=${0##*\/}
 
 # where templates reside
-DATADIR=/home/beaujean/.local/sw/bat/linux-ubuntu-14.04-x86_64/0.9.4/share/BAT
+DATADIR=/home/shehu/wip/npflavour/gnubuilds_SMonly/builds/local/share/BAT
 
 MYPROJECT=$1
 MYMODEL=$2

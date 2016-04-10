@@ -30,7 +30,7 @@ fi
 
 # ---------------------------------------------------------------------
 
-prefix="/home/beaujean/.local/sw/bat/linux-ubuntu-14.04-x86_64/0.9.4"
+prefix="/home/shehu/wip/npflavour/gnubuilds_SMonly/builds/local"
 exec_prefix="${prefix}"
 bindir="${exec_prefix}/bin"
 
@@ -104,15 +104,15 @@ if test "$echo_prefix" = "yes" ; then
 fi
 
 if test "$echo_cflags" = "yes" ; then
-    cflags="-I${includedir}  -pthread -std=c++11 -Wno-deprecated-declarations -m64 -I/home/beaujean/.local/sw/root/linux-ubuntu-14.04-x86_64/6.02.00/include/root"
+    cflags="-I${includedir}  -pthread -std=c++11 -Wno-deprecated-declarations -m64 -I/home/shehu/wip/npflavour/gnubuilds_SMonly/builds/local/include/root"
     echo $cflags
 fi
 
 if test "$echo_libs" = "yes" ; then
     if test "${libdir}" != "/usr/lib" ; then
-        echo -L${libdir} -lBAT -lBATmodels -lBATmtf -lBATmvc  -L/home/beaujean/.local/sw/root/linux-ubuntu-14.04-x86_64/6.02.00/lib/root -lCore -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMinuit -lRooFitCore -lRooFit -lRooStats -lFoam
+        echo -L${libdir} -lBAT -lBATmodels -lBATmtf -lBATmvc  -L/home/shehu/wip/npflavour/gnubuilds_SMonly/builds/local/lib/root -lCore -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMinuit
     else
-        echo -lBAT -lBATmodels -lBATmtf -lBATmvc  -L/home/beaujean/.local/sw/root/linux-ubuntu-14.04-x86_64/6.02.00/lib/root -lCore -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMinuit -lRooFitCore -lRooFit -lRooStats -lFoam
+        echo -lBAT -lBATmodels -lBATmtf -lBATmvc  -L/home/shehu/wip/npflavour/gnubuilds_SMonly/builds/local/lib/root -lCore -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMinuit
     fi
 fi
 

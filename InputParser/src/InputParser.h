@@ -102,6 +102,10 @@ public:
                                std::vector<CorrelatedGaussianObservables>& CGO,
                                std::vector<CorrelatedGaussianParameters>& CGP);
 
+    std::string ReadParameters(const std::string filename_i,
+                               std::vector<ModelParameter>& ModelPars,
+                               boost::ptr_vector<Observable>& Observables);
+
     /**
      * @brief A get method to access the pointer to the object of the StandardModel class.
      * @return myModel a pointer to the object of the StandardModel class

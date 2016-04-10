@@ -203,6 +203,122 @@ std::string InputParser::ReadParameters(const std::string filename_i,
     return (modname);
 }
 
+std::string InputParser::ReadParameters(const std::string filename_i,
+        std::vector<ModelParameter>& ModelPars,
+        boost::ptr_vector<Observable>& Observables)
+{
+    filename = filename_i;
+    modname = "";
+    lineNo = 0;
+    std::ifstream ifile(filename.c_str());
+    if (!ifile.is_open()) {
+      throw std::runtime_error("\nERROR: " + filename + " does not exist. Make sure to specify a valid model configuration file.\n");
+    }
+
+    if (filename.find("\\/") == std::string::npos) filepath = filename.substr(0, filename.find_last_of("\\/") + 1);
+    IsEOF = false;
+    do {
+        IsEOF = getline(ifile, line).eof();
+        lineNo++;
+        if (*line.rbegin() == '\r') line.erase(line.length() - 1); // for CR+LF
+        if (line.empty() || line.find_first_not_of(' ') == std::string::npos || line.at(0) == '#')
+            continue;
+        sep = new boost::char_separator<char>(" \t");
+        tok = new boost::tokenizer<boost::char_separator<char> >(line, *sep);
+        boost::tokenizer<boost::char_separator<char> >::iterator beg = tok->begin();
+
+        if (modelset == 0) {
+            modname = *beg;
+            myModel = myModelFactory.CreateModel(modname);
+            myModel->setModelName(modname);
+            myModel->InitializeModel();
+            if (myModel->IsModelInitialized()) {
+                std::cout << "\nModel Initialized: " << modname << std::endl;
+                modeldefinedinfile = filename;
+            } else throw std::runtime_error("\nERROR: " + modname + " not initialized successfully.\n");
+            modelset = 1;
+            continue;
+        } else if (modelset == 1 && beg->compare(myModel->ModelName()) == 0) {
+            continue;
+        }
+
+        std::string type = *beg;
+        ++beg;
+        if (type.compare("ModelParameter") == 0) {
+            
+            if (std::distance(tok->begin(), tok->end()) < 5) {
+                throw std::runtime_error("ERROR: lack of information on " + *beg + " in " + filename + ".\n");
+            } else {
+            ModelParameter tmpMP;
+            beg = tmpMP.ParseModelParameter(beg);
+            
+            if (checkDuplicateParameter[tmpMP.getname()].get<0>()) {
+                throw std::runtime_error("\nERROR: ModelParameter " + tmpMP.getname() + " appears more than once ...!! \n" +
+                "1st Occurrence: Line No:" + boost::lexical_cast<std::string>(checkDuplicateParameter[tmpMP.getname()].get<2>()) +
+                " in file " + checkDuplicateParameter[tmpMP.getname()].get<1>() + ".\n"
+                "2nd Occurrence: Line No:" + boost::lexical_cast<std::string>(lineNo) + " in file " + filename + ".\n");
+            }
+            
+            if (beg != tok->end())
+	      std::cout << "WARNING: unread information in parameter " << tmpMP.getname() << std::endl;
+            checkDuplicateParameter[tmpMP.getname()] = boost::make_tuple(true, filename, lineNo);
+               
+            ModelPars.push_back(tmpMP);
+            }
+
+        } else if (type.compare("Observable") == 0 || type.compare("BinnedObservable") == 0 || type.compare("FunctionObservable") == 0) {
+            
+            Observable * tmpObs = new Observable();
+            beg = tmpObs->ParseObservable(type, tok, beg, filepath, filename);
+            tmpObs->setTho(myObsFactory.CreateThMethod(tmpObs->getThname(), *myModel));
+            Observables.push_back(tmpObs);
+
+        } else if (type.compare("ModelFlag") == 0) {
+            if (std::distance(tok->begin(), tok->end()) < 3) {
+                throw std::runtime_error("ERROR: lack of information on " + *beg + " in " + filename);
+            }
+            std::string flagname = *beg;
+            ++beg;
+            if (boost::iequals(*beg, "true") || boost::iequals(*beg, "false")) {
+                /* Boolean flags */
+                bool value_bool;
+                if (boost::iequals(*beg, "true"))
+                    value_bool = 1;
+                else
+                    value_bool = 0;
+                if (!myModel->setFlag(flagname, value_bool)) {
+                    throw std::runtime_error("ERROR: setFlag error for " + flagname);
+                }
+                else std::cout << "set flag " << flagname << "=" << *beg << std::endl;
+            } else {
+                /* String flags */
+                std::string value_str = *beg;
+                if (!myModel->setFlagStr(flagname, value_str)) {
+                    throw std::runtime_error("ERROR: setFlag error for " + flagname);
+                } else std::cout << "set flag " << flagname << "=" << value_str << std::endl;
+            }
+            ++beg;
+            if (beg != tok->end()) std::cout << "WARNING: unread information in Flag " << flagname << std::endl;
+        } else if (type.compare("IncludeFile") == 0) {
+            std::string IncludeFileName = filepath + *beg;
+            std::cout << "\nIncluding File: " + IncludeFileName << std::endl;
+            ReadParameters(IncludeFileName, ModelPars, Observables);
+            IsEOF = false;
+            ++beg;
+        } else {
+            throw std::runtime_error("\nERROR: wrong keyword " + type + " in file " + filename + " line no. " + boost::lexical_cast<std::string>(lineNo) + ". Make sure to specify a valid model configuration file.\n");
+        }
+
+    } while (!IsEOF);
+
+    if (modelset == 0)
+        throw std::runtime_error("ERROR: Incorrect or missing model name in the model configuration file.\n");
+    if (!myModel->CheckFlags())
+        throw std::runtime_error("ERROR: incompatible flag(s)\n");
+
+    return (modname);
+}
+
 void InputParser::addCustomObservableType(const std::string name, boost::function<Observable*() > funct)
 {
     customObservableTypeMap[name] = funct;
