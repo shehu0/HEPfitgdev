@@ -28,7 +28,9 @@ MultiNest::MultiNest( ModelFactory& ModelF, ThObsFactory& ThObsF,
 
 //MultiNest::~MultiNest() {}
 
-RooStats::ModelConfig MultiNest::makeModelConfig(void){
+ModelConfig MultiNest::makeWorkSpace(void){ }  // ???
+
+ModelConfig MultiNest::makeModelConfig(void){
   ModelName = myInputParser.ReadParameters(ModelConf, ModPars, Obs);
   wSpace.renameSet("TemporaryName", (const char*) ModelName);
 
@@ -42,11 +44,12 @@ RooStats::ModelConfig MultiNest::makeModelConfig(void){
   // append argList with  in the form "x1,x2,x3,x4, ..., x$numberOfParameters"
 
   //  mc.SetParametersOfInterest( argList );  //  virtual void SetParametersOfInterest(const char *argList) { 
-
+  // set the Prior. see also the MonteCarloEngine::Initialize(Model* Mod_i)
+  
   // creat set of parameters, axes
   TString axes, factory_var;
   Int_t i = 0;
-  RooArgSet pars("parameters");   // set of parameters of interest
+  RooArgSet pars("parameters");   // set of parameters of interest. can do RooArgList parsList(pars); same
   RooRealVar * pPars;
   for (std::vector<ModelParameter>::iterator it = ModPars.begin(); it < ModPars.end(); it++) {
     axes += Form("x_%s", it->getname());

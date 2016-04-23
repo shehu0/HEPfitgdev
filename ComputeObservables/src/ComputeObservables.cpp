@@ -9,7 +9,9 @@
 #include "Observable2D.h"
 #include "CorrelatedGaussianObservables.h"
 #include "ComputeObservables.h"
+#ifndef __CINT__
 #include <boost/algorithm/string/predicate.hpp>
+#endif
 
 ComputeObservables::ComputeObservables(ModelFactory& ModelF, ThObsFactory& ThObsF, 
         const std::string& ModelConf_i, const int rank_i)

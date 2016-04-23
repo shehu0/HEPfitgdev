@@ -7,16 +7,24 @@
 
 #include <math.h>
 #ifndef __GSL_BLAS_H__
+#ifndef __CINT__
 #include <gsl/gsl_blas.h>
 #endif
+#endif
 #ifndef __GSL_LINALG_H__
+#ifndef __CINT__
 #include <gsl/gsl_linalg.h>
 #endif
+#endif
 #ifndef __GSL_EIGEN_H__
+#ifndef __CINT__
 #include <gsl/gsl_eigen.h>
 #endif
+#endif
 #ifndef GSLPP_MATRIX_COMPLEX_H
+#ifndef __CINT__
 #include "gslpp_matrix_complex.h"
+#endif
 #endif
 
 namespace gslpp

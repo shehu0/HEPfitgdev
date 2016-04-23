@@ -9,7 +9,9 @@
 #include <iostream>
 #include <iomanip>
 #include <stdexcept>
+#ifndef __CINT__
 #include <gsl/gsl_sf.h>
+#endif
 #include "EWSMcache.h"
 
 EWSMcache::EWSMcache(const StandardModel& SM_i)

@@ -8,8 +8,10 @@
 #include <cstdlib>
 #include <stdexcept>
 #include <cmath>
+#ifndef __CINT__
 #include <gsl/gsl_complex.h>
 #include <gsl/gsl_sf.h>
+#endif
 #include "Polylogarithms.h"
 
 

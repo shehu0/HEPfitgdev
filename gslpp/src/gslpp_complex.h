@@ -9,9 +9,12 @@
 #ifndef GSLPP_COMPLEX
 #define GSLPP_COMPLEX
 #ifndef __GSL_COMPLEX_H__
+#ifndef __CINT__
 # include <gsl/gsl_complex.h>
 #endif
+#endif
 #ifndef __GSL_COMPLEX_MATH_H__
+#endif
 # include <gsl/gsl_complex_math.h>
 #endif
 

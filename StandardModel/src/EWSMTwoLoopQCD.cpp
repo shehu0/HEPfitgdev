@@ -6,7 +6,9 @@
  */
 
 #include <stdexcept>
+#ifndef __CINT__
 #include <gsl/gsl_sf.h>
+#endif
 #include "EWSMTwoLoopQCD.h"
 
 EWSMTwoLoopQCD::EWSMTwoLoopQCD(const EWSMcache& cache_i)

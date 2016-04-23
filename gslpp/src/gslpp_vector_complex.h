@@ -9,13 +9,19 @@
 #define GSLPP_VECTOR_COMPLEX_H
 #include <iostream>
 #ifndef __GSL_VECTOR_COMPLEX_DOUBLE_H__
+#ifndef __CINT__
 #include <gsl/gsl_vector_complex_double.h>
 #endif
+#endif
 #ifndef GSLPP_COMPLEX_H
+#ifndef __CINT__
 #include "gslpp_complex.h"
 #endif
+#endif
 #ifndef GSLPP_VECTOR_BASE_H
+#ifndef __CINT__
 #include "gslpp_vector_base.h"
+#endif
 #endif
 
 namespace gslpp

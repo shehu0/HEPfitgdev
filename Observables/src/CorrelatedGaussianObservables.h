@@ -9,7 +9,9 @@
 #define	CORRELATEDGAUSSIANOBSERVABLES_H
 
 #include "Observable.h"
+#ifndef __CINT__
 #include <boost/ptr_container/ptr_vector.hpp>
+#endif
 
 class ThObsFactory;
 

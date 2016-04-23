@@ -14,8 +14,10 @@
 #include "CorrelatedGaussianObservables.h"
 #include "ModelParameter.h"
 #include "Model.h"
+#ifndef __CINT__
 #include "boost/shared_ptr.hpp"
 #include "boost/make_shared.hpp"
+#endif
 #include <TF1.h>
 #ifdef _MPI
 #include <mpi.h>

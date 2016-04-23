@@ -8,13 +8,19 @@
 #include <stdlib.h>
 #include <iostream>
 #ifndef __GSL_BLAS_H__
+#ifndef __CINT__
 #include <gsl/gsl_blas.h>
 #endif
+#endif
 #ifndef GSLPP_VECTOR_DOUBLE_H
+#ifndef __CINT__
 #include "gslpp_vector_double.h"
 #endif
+#endif
 #ifndef GSLPP_VECTOR_COMPLEX_H
+#ifndef __CINT__
 #include "gslpp_vector_complex.h"
+#endif
 #endif
 
 namespace gslpp

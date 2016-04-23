@@ -10,7 +10,10 @@
 
 #include "Observable.h"
 #include <TMatrixD.h>
+
+#ifndef __CINT__
 #include <boost/tokenizer.hpp>
+#endif
 
 class ThObsFactory;
 /**

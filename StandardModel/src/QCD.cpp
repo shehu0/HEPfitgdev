@@ -11,10 +11,12 @@
 #include <math.h>
 #include <map>
 #include <stdexcept>
+#ifndef __CINT__
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_roots.h>
 #include <gsl/gsl_sf.h>
+#endif
 #include <TF1.h>
 #include <Math/WrappedTF1.h>
 #include <Math/BrentRootFinder.h>

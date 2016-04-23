@@ -13,7 +13,11 @@
 #include <TMath.h>
 #include <iostream>
 #include <fstream>
+
+#ifndef __CINT__
 #include <boost/tokenizer.hpp>
+#endif
+
 #include <string>
 #include <sstream>
 

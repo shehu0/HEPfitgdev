@@ -10,8 +10,12 @@
 #define	MODELFACTORY_H
 
 #include "StandardModel.h"
+
+#ifndef __CINT__
 #include <boost/functional/factory.hpp>
 #include <boost/function.hpp>
+#endif
+
 #include <map>
 
 /**

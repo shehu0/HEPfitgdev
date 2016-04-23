@@ -11,7 +11,10 @@
 #include <stdexcept>
 #include "Particle.h"
 #include "BParameter.h"
+
+#ifndef __CINT__
 #include "boost/lexical_cast.hpp"
+#endif
 
 /**
  * @class Meson

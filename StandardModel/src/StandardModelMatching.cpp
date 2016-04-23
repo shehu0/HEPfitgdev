@@ -8,9 +8,11 @@
 #include "StandardModelMatching.h"
 #include "StandardModel.h"
 #include "QCD.h"
+#ifndef __CINT__
 #include <gsl/gsl_sf_dilog.h>
 #include <gsl/gsl_sf_zeta.h>
 #include <gsl/gsl_sf_clausen.h>
+#endif
 #include <stdexcept>
 
 

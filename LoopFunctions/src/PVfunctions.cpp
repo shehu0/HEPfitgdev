@@ -9,8 +9,10 @@
 #include <stdexcept>
 #include <cmath>
 #include <algorithm>
+#ifndef __CINT__
 #include <gsl/gsl_complex.h>
 #include <gsl/gsl_sf.h>
+#endif
 #include "PVfunctions.h"
 
 

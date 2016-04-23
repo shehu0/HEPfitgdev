@@ -8,7 +8,9 @@
 #include <cstdlib>
 #include <stdexcept>
 #include <cmath>
+#ifndef __CINT__
 #include <gsl/gsl_sf.h>
+#endif
 #include "ClausenFunctions.h"
 
 

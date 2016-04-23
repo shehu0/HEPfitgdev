@@ -6,8 +6,10 @@
  */
 
 #ifndef GSLPP_COMPLEX_H
+#ifndef __CINT__
 #include "gslpp_complex.h"
 #include <gsl/gsl_sf.h>
+#endif
 #endif
 #include <math.h>
 

@@ -12,7 +12,9 @@
 #include <TF1.h>
 #include <Math/WrappedTF1.h>
 #include <Math/BrentRootFinder.h>
+#ifndef __CINT__
 #include <gsl/gsl_sf_zeta.h>
+#endif
 #include "StandardModel.h"
 #include "EWSMcache.h"
 #include "EWSMOneLoopEW.h"

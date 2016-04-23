@@ -9,7 +9,10 @@
 #define	MODEL_H
 
 #include <map>
+
+#ifndef __CINT__
 #include <boost/ref.hpp>
+#endif
 
 /**
  * @class Model

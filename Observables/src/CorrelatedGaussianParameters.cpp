@@ -10,7 +10,11 @@
 #include <fstream>
 #include <sstream>
 #include <math.h>
+
+#ifndef __CINT__
 #include <boost/lexical_cast.hpp>
+#endif
+
 #include "CorrelatedGaussianParameters.h"
 
 CorrelatedGaussianParameters::CorrelatedGaussianParameters(std::string name_i)

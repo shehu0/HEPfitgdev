@@ -10,7 +10,10 @@
 
 #include <string>
 #include <iostream>
+
+#ifndef __CINT__
 #include <boost/tokenizer.hpp>
+#endif
 
 /**
  * @class ModelParameter
