@@ -21,12 +21,10 @@
 #include <iostream>
 #include <fstream>
 #include <istream>
-#ifndef __CINT__
 #include <boost/tokenizer.hpp>
 #include <boost/ptr_container/ptr_vector.hpp>
 #include <boost/tuple/tuple.hpp>
 #include <boost/function.hpp>
-#endif
 #include <string>
 
 /**
@@ -51,9 +49,6 @@
 class InputParser {
 public:
     
-
-  //    InputParser(){}
-
     /**
      * @brief Constructor.
      */

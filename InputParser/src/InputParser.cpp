@@ -8,10 +8,8 @@
 #include "InputParser.h"
 #include "ModelFactory.h"
 #include <stdexcept>
-#ifndef __CINT__
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#endif
 #include <iostream>
 
 InputParser::InputParser(ModelFactory& ModF, ThObsFactory& ObsF) : myModelFactory(ModF), myObsFactory(ObsF), filename(""), rank(0)

@@ -28,10 +28,7 @@
 // #include "THDM.h"
 // #include "FlavourWilsonCoefficient.h"
 // /** END: REMOVE FROM THE PACKAGE **/
-
-#ifndef __CINT__
 #include <boost/bind.hpp>
-#endif
 
 ModelFactory::ModelFactory()
 {

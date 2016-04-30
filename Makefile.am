@@ -7,16 +7,16 @@ AM_CXXFLAGS = -I$(top_srcdir)/ComputeObservables/src \
  -I$(top_srcdir)/gslpp/src \
  -I$(top_srcdir)/InputParser/src \
  -I$(top_srcdir)/LoopFunctions/src \
+ -I$(top_srcdir)/MonteCarlo/src \
  -I$(top_srcdir)/Observables/src \
  -I$(top_srcdir)/StandardModel/src \
  -I$(top_srcdir)/EW/src
-# -I$(top_srcdir)/MonteCarlo/src 
 
 # -I$(top_srcdir)/Flavour/src \
 # -I$(top_srcdir)/FlavourWilsonCoefficient/src \
 # -I$(top_srcdir)/EW/src 
 
-#bin_PROGRAMS = Analysis/analysis
+bin_PROGRAMS = Analysis/analysis
 
 pkginclude_HEADERS = ComputeObservables/src/InputParameters.h \
 ComputeObservables/src/ComputeObservables.h \
@@ -37,6 +37,8 @@ LoopFunctions/src/BernoulliNumbers.h \
 LoopFunctions/src/PVfunctions.h \
 LoopFunctions/src/Polylogarithms.h \
 LoopFunctions/src/ClausenFunctions.h \
+MonteCarlo/src/MonteCarlo.h \
+MonteCarlo/src/MonteCarloEngine.h \
 Observables/src/HiggsObservable.h \
 Observables/src/ThObservable.h \
 Observables/src/ModelParameter.h \
@@ -70,9 +72,6 @@ StandardModel/src/WilsonTemplate.h \
 EW/src/Mw.h \
 EW/src/GammaZ.h
 
-#MonteCarlo/src/MonteCarlo.h 
-#MonteCarlo/src/MonteCarloEngine.h 
-
 themySOURCES = ComputeObservables/src/ComputeObservables.cpp \
 EventGeneration/src/GenerateEvent.cpp \
 gslpp/src/gslpp_vector_complex.cpp \
@@ -88,6 +87,8 @@ LoopFunctions/src/PVfunctions.cpp \
 LoopFunctions/src/Polylogarithms.cpp \
 LoopFunctions/src/BernoulliNumbers.cpp \
 LoopFunctions/src/LoopToolsWrapper.cpp \
+MonteCarlo/src/MonteCarlo.cpp \
+MonteCarlo/src/MonteCarloEngine.cpp \
 Observables/src/CorrelatedGaussianParameters.cpp \
 Observables/src/CorrelatedGaussianObservables.cpp \
 Observables/src/ModelParameter.cpp \
@@ -115,14 +116,11 @@ StandardModel/src/EWSMThreeLoopQCD.cpp \
 EW/src/Mw.cpp \
 EW/src/GammaZ.cpp
 
-#MonteCarlo/src/MonteCarlo.cpp 
-#MonteCarlo/src/MonteCarloEngine.cpp 
+Analysis_analysis_SOURCES =  $(themySOURCES) Analysis/main.cpp
 
-#Analysis_analysis_SOURCES =  $(themySOURCES) Analysis/main.cpp
+Analysis_analysis_CPPFLAGS = $(SuF_CFLAGS) -I@ROOTINCDIR@  $(BOOST_CPPFLAGS) $(GSL_CFLAGS) 
 
-#Analysis_analysis_CPPFLAGS = $(SuF_CFLAGS) -I@ROOTINCDIR@  $(BOOST_CPPFLAGS) $(GSL_CFLAGS) 
-
-#Analysis_analysis_LDADD = $(SuF_LIBS) $(FLIBS) $(GSL_LIBS) -lgslcblas $(BOOST_PROGRAM_OPTIONS_LIBS) $(BOOST_PROGRAM_OPTIONS_LDFLAGS) -L@ROOTLIBDIR@ @ROOTGLIBS@ -lRooFitCore -lRooFit -lRooStats -lFoam -lMathMore -lMinuit @ROOTAUXLIBS@ 
+Analysis_analysis_LDADD = $(SuF_LIBS) $(FLIBS) $(GSL_LIBS) -lgslcblas $(BOOST_PROGRAM_OPTIONS_LIBS) $(BOOST_PROGRAM_OPTIONS_LDFLAGS) -L@ROOTLIBDIR@ @ROOTGLIBS@ -lRooFitCore -lRooFit -lRooStats -lFoam -lMathMore -lMinuit @ROOTAUXLIBS@ 
 
 
 pkglib_LTLIBRARIES = libHEPfit-@HEPfit_API_VERSION@.la

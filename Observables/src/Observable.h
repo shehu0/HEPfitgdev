@@ -12,10 +12,7 @@
 #include <string>
 #include <iostream>
 #include <TH1D.h>
-
-#ifndef __CINT__
 #include <boost/tokenizer.hpp>
-#endif
 
 /**
  * @class Observable
