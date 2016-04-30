@@ -12,9 +12,6 @@
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
-/* Define to 1 if you have the `BAT' library (-lBAT). */
-#undef HAVE_LIBBAT
-
 /* Define to 1 if you have the `ooptools' library (-looptools). */
 #undef HAVE_LIBOOPTOOLS
 

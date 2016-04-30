@@ -73,16 +73,16 @@ int main(int argc, char** argv)
         /* Create an object of the class MonteCarlo. */
 	//        MultiNest MN(ModelF, ThObsF, ModelConf, MCMCConf, FileOut, JobTag);
 	// MN.RunMultiNest();
-	MonteCarlo MC(ModelF, ThObsF, ModelConf, MCMCConf, FileOut, JobTag);
+	//@@@	MonteCarlo MC(ModelF, ThObsF, ModelConf, MCMCConf, FileOut, JobTag);
         
         /* Do a test run if you wish to see the values of the observables      */
         /* and the correlated Gaussian observables defined in the model        */
         /* configuration file computed with the central value of the mandatory */
         /* parameters defined in the same file.                                */
-        if (MCMCConf.compare("--noMC") == 0) MC.TestRun(rank);
+	//@@@        if (MCMCConf.compare("--noMC") == 0) MC.TestRun(rank);
         
         /* Initiate the Mote Carlo run. */
-        else MC.Run(rank);
+	//@@@@        else MC.Run(rank);
 
     /* Necessary if MPI support is enabled during compilation. */
 #ifdef _MPI
