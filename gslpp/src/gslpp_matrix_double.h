@@ -11,12 +11,16 @@
 #ifndef __GSL_MATRIX_DOUBLE_H__
 #ifndef __CINT__
 #include <gsl/gsl_matrix_double.h>
+#else
+class gsl_matrix;
 #endif
 #endif
 #ifndef GSLPP_COMPLEX_H
 #ifndef __GSL_MATRIX_DOUBLE_H__
 #ifndef __CINT__
 #include <gsl/gsl_matrix_double.h>
+#else
+class gsl_matrix;
 #endif
 #endif
 #ifndef __CINT__

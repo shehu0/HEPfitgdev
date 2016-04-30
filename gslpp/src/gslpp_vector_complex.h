@@ -11,6 +11,8 @@
 #ifndef __GSL_VECTOR_COMPLEX_DOUBLE_H__
 #ifndef __CINT__
 #include <gsl/gsl_vector_complex_double.h>
+#else
+class gsl_vector_complex;
 #endif
 #endif
 #ifndef GSLPP_COMPLEX_H

@@ -51,9 +51,6 @@
 class InputParser {
 public:
     
-
-  //    InputParser(){}
-
     /**
      * @brief Constructor.
      */
