@@ -1,5 +1,41 @@
+libtool: compile:  g++ -DHAVE_CONFIG_H -I. -I./Config -I/home/shehu/wip/RooStat/dev/MultiNestPlugin/local/include -I/home/shehu/wip/npflavour/builds/local/include -I/home/shehu/wip/RooStat/dev/MultiNestPlugin/local/include/root -I/home/shehu/wip/npflavour/builds/local/include -I/usr/local/include -D__MY_DEBUG__ -I./ComputeObservables/src -I./ComputeObservables/src -I./EventGeneration/src -I./gslpp/src -I./InputParser/src -I./LoopFunctions/src -I./MonteCarlo/src -I./Observables/src -I./StandardModel/src -I./EW/src -std=c++11 -MT MonteCarlo/src/libHEPfit_0.3_la-MultiNest.lo -MD -MP -MF MonteCarlo/src/.deps/libHEPfit_0.3_la-MultiNest.Tpo -c MonteCarlo/src/MultiNest.cxx  -fPIC -DPIC -o MonteCarlo/src/.libs/libHEPfit_0.3_la-MultiNest.o
+MonteCarlo/src/MultiNest.cxx: In constructor 'MultiNest::MultiNest(ModelFactory&, ThObsFactory&, const string&)':
+MonteCarlo/src/MultiNest.cxx:13:1: error: uninitialized reference member in 'class ModelFactory&' [-fpermissive]
+ MultiNest::MultiNest( ModelFactory& ModelF_i, ThObsFactory& ThObsF_i, 
+ ^
+In file included from MonteCarlo/src/MultiNest.cxx:8:0:
+MonteCarlo/src/MultiNest.h:32:17: note: 'ModelFactory& MultiNest::ModelF' should be initialized
+   ModelFactory& ModelF;
+                 ^
+MonteCarlo/src/MultiNest.cxx:13:1: error: uninitialized reference member in 'class ThObsFactory&' [-fpermissive]
+ MultiNest::MultiNest( ModelFactory& ModelF_i, ThObsFactory& ThObsF_i, 
+ ^
+In file included from MonteCarlo/src/MultiNest.cxx:8:0:
+MonteCarlo/src/MultiNest.h:33:17: note: 'ThObsFactory& MultiNest::ThObsF' should be initialized
+   ThObsFactory& ThObsF;
+                 ^
+MonteCarlo/src/MultiNest.cxx:13:1: error: uninitialized reference member in 'const string& {aka const class std::basic_string<char>&}' [-fpermissive]
+ MultiNest::MultiNest( ModelFactory& ModelF_i, ThObsFactory& ThObsF_i, 
+ ^
+In file included from MonteCarlo/src/MultiNest.cxx:8:0:
+MonteCarlo/src/MultiNest.h:34:22: note: 'const string& MultiNest::ModelConf' should be initialized
+   const std::string& ModelConf;
+                      ^
+MonteCarlo/src/MultiNest.cxx:13:1: error: uninitialized reference member in 'class RooWorkspace&' [-fpermissive]
+ MultiNest::MultiNest( ModelFactory& ModelF_i, ThObsFactory& ThObsF_i, 
+ ^
+In file included from MonteCarlo/src/MultiNest.cxx:8:0:
+MonteCarlo/src/MultiNest.h:37:17: note: 'RooWorkspace& MultiNest::wSpace' should be initialized
+   RooWorkspace& wSpace;  // Workspace to store objects
+                 ^
+make: *** [MonteCarlo/src/libHEPfit_0.3_la-MultiNest.lo] Error 1
+
+
+
 HEPfit - a Fitting Tool for the Standard Model and Beyond
 ===========================================================================
+
+Only Root v6 is supported.
 
 version in progress
 -------------------

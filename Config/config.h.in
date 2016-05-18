@@ -12,6 +12,13 @@
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
+/* Define to 1 if you have the `MultiNestPlugin-1.0' library
+   (-lMultiNestPlugin-1.0). */
+#undef HAVE_LIBMULTINESTPLUGIN_1_0
+
+/* Define to 1 if you have the `nest3' library (-lnest3). */
+#undef HAVE_LIBNEST3
+
 /* Define to 1 if you have the `ooptools' library (-looptools). */
 #undef HAVE_LIBOOPTOOLS
 
@@ -63,6 +70,9 @@
 
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
+
+/* ROOT Version */
+#undef ROOTVERSION
 
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS

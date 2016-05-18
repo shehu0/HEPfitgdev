@@ -1,17 +1,16 @@
 ACLOCAL_AMFLAGS = ${ACLOCAL_FLAGS} -I m4 --install
 AUTOMAKE_OPTIONS = subdir-objects
 
-AM_CXXFLAGS = -I$(top_srcdir)/ComputeObservables/src \
+AM_CXXFLAGS = -fpermissive -I$(top_srcdir)/ComputeObservables/src \
  -I$(top_srcdir)/ComputeObservables/src \
  -I$(top_srcdir)/EventGeneration/src \
  -I$(top_srcdir)/gslpp/src \
  -I$(top_srcdir)/InputParser/src \
  -I$(top_srcdir)/LoopFunctions/src \
+ -I$(top_srcdir)/MonteCarlo/src \
  -I$(top_srcdir)/Observables/src \
  -I$(top_srcdir)/StandardModel/src \
  -I$(top_srcdir)/EW/src
-
- # -I$(top_srcdir)/MonteCarlo/src 
 
 # -I$(top_srcdir)/Flavour/src \
 # -I$(top_srcdir)/FlavourWilsonCoefficient/src \
@@ -38,6 +37,8 @@ LoopFunctions/src/BernoulliNumbers.h \
 LoopFunctions/src/PVfunctions.h \
 LoopFunctions/src/Polylogarithms.h \
 LoopFunctions/src/ClausenFunctions.h \
+MonteCarlo/src/MultiNest.h \
+MonteCarlo/src/RooModelPdf.h \
 Observables/src/HiggsObservable.h \
 Observables/src/ThObservable.h \
 Observables/src/ModelParameter.h \
@@ -72,7 +73,7 @@ EW/src/Mw.h \
 EW/src/GammaZ.h
 
 # MonteCarlo/src/MonteCarlo.h \
-# MonteCarlo/src/MonteCarloEngine.h
+# MonteCarlo/src/MonteCarloEngine.h 
 
 themySOURCES = ComputeObservables/src/ComputeObservables.cpp \
 EventGeneration/src/GenerateEvent.cpp \
@@ -84,6 +85,8 @@ gslpp/src/gslpp_vector_double.cpp \
 InputParser/src/ThObsFactory.cpp \
 InputParser/src/InputParser.cpp \
 InputParser/src/ModelFactory.cpp \
+MonteCarlo/src/MultiNest.cxx \
+MonteCarlo/src/RooModelPdf.cxx \
 LoopFunctions/src/ClausenFunctions.cpp \
 LoopFunctions/src/PVfunctions.cpp \
 LoopFunctions/src/Polylogarithms.cpp \
@@ -116,22 +119,43 @@ StandardModel/src/EWSMThreeLoopQCD.cpp \
 EW/src/Mw.cpp \
 EW/src/GammaZ.cpp
 
-# MonteCarlo/src/MonteCarlo.cpp \
-# MonteCarlo/src/MonteCarloEngine.cpp 
+#MonteCarlo/src/MonteCarlo.cpp \
+#MonteCarlo/src/MonteCarloEngine.cpp 
 
-Analysis_analysis_SOURCES =  $(themySOURCES) Analysis/main.cpp
+nodist_themySOURCES = MonteCarlo/src/G__ModelPdf.cxx
 
-Analysis_analysis_CPPFLAGS = $(SuF_CFLAGS) -I@ROOTINCDIR@  $(BOOST_CPPFLAGS) $(GSL_CFLAGS) 
+Analysis_analysis_SOURCES =  $(themySOURCES) Analysis/main.cpp $(nodist_themySOURCES)
 
-Analysis_analysis_LDADD = $(SuF_LIBS) $(FLIBS) $(GSL_LIBS) -lgslcblas $(BOOST_PROGRAM_OPTIONS_LIBS) $(BOOST_PROGRAM_OPTIONS_LDFLAGS) -L@ROOTLIBDIR@ @ROOTGLIBS@ -lRooFitCore -lRooFit -lRooStats -lFoam -lMathMore -lMinuit @ROOTAUXLIBS@ 
+Analysis_analysis_CPPFLAGS = $(HEPfit_CFLAGS) -I@ROOTINCDIR@  $(BOOST_CPPFLAGS) $(GSL_CFLAGS) 
 
+Analysis_analysis_LDADD = $(HEPfit_LIBS) $(FLIBS) $(GSL_LIBS) -lgslcblas $(BOOST_PROGRAM_OPTIONS_LIBS) $(BOOST_PROGRAM_OPTIONS_LDFLAGS) -L@ROOTLIBDIR@ @ROOTGLIBS@ -lRooFitCore -lRooFit -lRooStats -lFoam -lMathMore -lMinuit @ROOTAUXLIBS@ 
 
 pkglib_LTLIBRARIES = libHEPfit-@HEPfit_API_VERSION@.la
-libHEPfit_@HEPfit_API_VERSION@_la_SOURCES = $(themySOURCES) 
+libHEPfit_@HEPfit_API_VERSION@_la_SOURCES = $(themySOURCES)
+nodist_libHEPfit_@HEPfit_API_VERSION@_la_SOURCES = $(nodist_themySOURCES)
 
 libHEPfit_@HEPfit_API_VERSION@_la_LDFLAGS = -version-info $(HEPfit_SO_VERSION)
-libHEPfit_@HEPfit_API_VERSION@_la_CPPFLAGS = $(SuF_CFLAGS) -I@ROOTINCDIR@  $(BOOST_CPPFLAGS)  $(GSL_CFLAGS)
-libHEPfit_@HEPfit_API_VERSION@_la_LIBDADD = $(SuF_LIBS) $(FLIBS) $(GSL_LIBS) -lgslcblas $(BOOST_PROGRAM_OPTIONS_LIBS) $(BOOST_PROGRAM_OPTIONS_LDFLAGS) -L@ROOTLIBDIR@  @ROOTGLIBS@ -lRooFitCore -lRooFit -lRooStats -lFoam -lMathMore -lMinuit @ROOTAUXLIBS@  
+libHEPfit_@HEPfit_API_VERSION@_la_CPPFLAGS = $(HEPfit_CFLAGS) -I@ROOTINCDIR@  $(BOOST_CPPFLAGS) $(GSL_CFLAGS)
+libHEPfit_@HEPfit_API_VERSION@_la_LIBDADD = $(HEPfit_LIBS) $(FLIBS) $(GSL_LIBS) -lgslcblas -llapack -lgfortran $(BOOST_PROGRAM_OPTIONS_LIBS) $(BOOST_PROGRAM_OPTIONS_LDFLAGS) -L@ROOTLIBDIR@  @ROOTGLIBS@ -lRooFitCore -lRooFit -lRooStats -lFoam -lTree -lRIO -lMatrix -lHist -lMathMore -lMathCore -lGraf -lGpad -lMinuit -lFoam -lRooStats @ROOTAUXLIBS@
+
+######### Dictionary generation #######################
+MonteCarlo/src/G__ModelPdf.cxx: MonteCarlo/src/RooModelPdf.h MonteCarlo/src/LinkDef.h
+	@echo " "
+	@echo "Generating dictionary $@..."
+	@echo " "
+	$(ROOTCLING) -f $@ -c -I$(AM_CXXFLAGS) $(BOOST_CPPFLAGS) $(GSL_CFLAGS) -I@ROOTINCDIR@ $^
+
+# rootmapdir = $(libdir)
+# rootmap_DATA = .libs/libMultiNestPlugin_@MNP_API_VERSION@.rootmap
+# rootmap_DATA += .libs/libMultiNestPlugin_1_rdict.pcm
+
+# .libs/libMultiNestPlugin_@MNP_API_VERSION@.rootmap: libMultiNestPlugin-@MNP_API_VERSION@.la
+#         cp libMultiNestPlugin_@MNP_API_VERSION@.rootmap libMultiNestPlugin_1_rdict.pcm .libs/
+
+# .libs/libMultiNestPlugin_1_rdict.pcm: .libs/libMultiNestPlugin_@MNP_API_VERSION@.rootmap
+
+
+# CLEANFILES = *_rdict* G__* *.rootmap
 
 
 pkgconfigdir = $(libdir)/pkgconfig
@@ -146,5 +170,5 @@ m4data_DATA = m4/hepfit.m4
 
 DISTCLEANFILES = config.hepfit
 # CLEANFILES = hepfit.pc hepfit-config
-# EXTRA_DIST =  hepfit.pc.in 
+EXTRA_DIST = MonteCarlo/src/LinkDef.h 
 

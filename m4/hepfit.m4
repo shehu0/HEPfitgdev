@@ -1,3 +1,88 @@
+dnl ###### MultiNest ######
+AC_DEFUN([MULTINEST],
+[
+AC_MSG_CHECKING([for MultiNest location])
+
+AC_ARG_WITH(multinest,
+        AC_HELP_STRING([--with-multinest=DIR],[location of MultiNest installation @<:@default=system libs@:>@]),
+        [],
+	[with_multinest=system])
+
+if test "x$with_multinest" = "xno"; then
+AC_MSG_ERROR([libnest3 is required. Please install MultiNest.])
+fi
+
+if test "x$with_multinest" = "xsystem"; then
+	AC_MSG_RESULT([in system libraries])
+	oldlibs="$LIBS"
+	AC_CHECK_LIB(nest3,main,[],
+			[
+			AC_MSG_ERROR([Cannot find libnest3.a. Please install MultiNest or use --with-multinest=.])
+			]
+		     )
+	multinestLIBS="$LIBS"
+	LIBS=$oldlibs
+else
+	if test "`uname -m`" = "x86_64" -a -e "$with_multinest/libnest3.a"; then
+		AC_MSG_RESULT([found in $with_multinest])
+		multinestLIBS="-L$with_multinest -R$with_multinest -lnest3"
+	elif test -e "$with_multinest/lib/libnest3.a"; then
+		AC_MSG_RESULT([found in $with_multinest])
+		multinestLIBS="-L$with_multinest -R$with_multinest -lnest3"
+	else
+		AC_MSG_RESULT([not found])
+		AC_MSG_ERROR([Can't find $with_multinest/libnest3.a])
+	fi
+fi
+
+HEPfit_LIBS="$HEPfit_LIBS $multinestLIBS"
+
+])
+
+dnl ###### MultiNestPlugin ######
+AC_DEFUN([MULTINESTPLUGIN],
+[
+AC_MSG_CHECKING([for MultiNestPlugin location])
+
+AC_ARG_WITH(multinestplugin,
+        AC_HELP_STRING([--with-multinestplugin=DIR],[location of MultiNestPlugin installation @<:@default=system libs@:>@]),
+        [],
+	[with_multinestplugin=system])
+
+if test "x$with_multinestplugin" = "xno"; then
+AC_MSG_ERROR([MultiNestPlugin-1.0 is required. Please install RootMultiNest.])
+fi
+
+if test "x$with_multinestplugin" = "xsystem"; then
+	AC_MSG_RESULT([in system libraries])
+	oldlibs="$LIBS"
+   
+        AC_LANG_SAVE dnl Save the current state
+	AC_LANG_CPLUSPLUS
+        AC_CHECK_LIB(MultiNestPlugin-1.0,main,[],
+			[
+			AC_MSG_ERROR([Cannot find libMultiNestPlugin-1.0.a. Please install RootMultiNest or use --with-multinestplugin=.])
+			]
+		    )
+        AC_LANG_RESTORE
+	
+	multinestpluginLIBS="$LIBS"
+	LIBS=$oldlibs
+else
+	if test "`uname -m`" = "x86_64" -a -e "$with_multinestplugin/lib/rootmultinestplugin/libMultiNestPlugin-1.0.a" -a -d "$with_multinestplugin/include/RooStats"; then
+		AC_MSG_RESULT([found in $with_multinestplugin/lib/rootmultinestplugin])
+		multinestpluginLIBS="-L$with_multinestplugin/lib/rootmultinestplugin -R$with_multinestplugin/lib/rootmultinestplugin -lMultiNestPlugin-1.0"
+		multinestplugin_inc="-I$with_multinestplugin/include"	
+	else
+		AC_MSG_RESULT([not found])
+		AC_MSG_ERROR([Can't find $with_multinestplugin/lib/rootmultinestplugin/libMultiNestPlugin-1.0.a or the headers in $with_multinestplugin/include/RooStats])
+	fi
+fi
+
+HEPfit_LIBS="$HEPfit_LIBS $multinestpluginLIBS"
+HEPfit_CFLAGS="$HEPfit_CFLAGS $multinestplugin_inc"
+])
+
 dnl ###### GSL CHECK ######
 AC_DEFUN([HEPFIT_CHECK_GSL],
 [
@@ -83,8 +168,8 @@ else
 	fi
 fi
 
-SuF_LIBS="$SuF_LIBS $LTLIBS"
-SuF_CFLAGS="$SuF_CFLAGS $LTINCLUDE"
+HEPfit_LIBS="$HEPfit_LIBS $LTLIBS"
+HEPfit_CFLAGS="$HEPfit_CFLAGS $LTINCLUDE"
 ])
 
 
@@ -141,7 +226,7 @@ if test "x$with_bat" = "xsystem"; then
 	BATLIBS="$LIBS"
 	LIBS=$oldlibs
 else
-	if test "`uname -m`" = "x86_64" -a -e "$with_bat/lib64/libBAT.a" -a -d "$with_looptools/include/BAT"; then
+	if test "`uname -m`" = "x86_64" -a -e "$with_bat/lib64/libBAT.a" -a -d "$with_bat/include/BAT"; then
 		AC_MSG_RESULT([found in $with_bat])
 		BATLIBS="-L$with_bat/lib64 -R$with_bat/lib64 -lBATmodels -lBAT"
 		BATINCLUDE="-I$with_bat/include"
@@ -155,8 +240,8 @@ else
 	fi
 fi
 
-SuF_LIBS="$SuF_LIBS $BATLIBS"
-SuF_CFLAGS="$SuF_CFLAGS $BATINCLUDE"
+HEPfit_LIBS="$HEPfit_LIBS $BATLIBS"
+HEPfit_CFLAGS="$HEPfit_CFLAGS $BATINCLUDE"
 ])
 
 dnl ## HEPFIT overview
@@ -178,7 +263,11 @@ cat << _HEPFIT_EOF_ > config.hepfit
 ***--------------------------------------------------
 *** Prefix:		$prefix
 ***
-*** BAT:		$with_bat
+*** MultiNest:		$with_multinest
+***
+*** RootMultiNestPlugin:$with_multinestplugin
+#***
+#*** BAT:		$with_bat
 ***
 *** GSL:		`$GSL_CONFIG --prefix`
 *** root:   		${ROOTCFLAGS} (root-version: $ROOTVERSION)
